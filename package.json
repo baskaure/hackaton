@@ -1,0 +1,12 @@
+{
+    "name": "explore-france",
+    "version": "1.0.0",
+    "description": "Discover random destinations in France",
+    "main": "server/app.js",
+    "scripts": {
+        "start": "node server/app.js"
+    },
+    "dependencies": {
+        "express": "^4.19.2"
+    }
+}
