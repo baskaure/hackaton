@@ -2,6 +2,7 @@ package hackaton
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -9,16 +10,36 @@ import (
 	"time"
 )
 
-var apiKey string = "JAA5uTwfT7ThDYxrXFJDVeE79WptQ6FS"
-var apiSecret string = "GdnrCuu8RL9PQ2Vu"
+var (
+	apiKey    string = "JAA5uTwfT7ThDYxrXFJDVeE79WptQ6FS"
+	apiSecret string = "GdnrCuu8RL9PQ2Vu"
+	token     string = ""
+	latitude  float64
+	longitude float64
+)
 
-var token string = ""
+func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
 
-func API1() {
-	http.HandleFunc("/flight", Flight)
-	http.HandleFunc("/activitie", Activites)
-	http.HandleFunc("/hotel", Hotel)
+	var coords struct {
+		Latitude  float64 `json:"latitude"`
+		Longitude float64 `json:"longitude"`
+	}
 
+	err := json.NewDecoder(r.Body).Decode(&coords)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	latitude = coords.Latitude
+	longitude = coords.Longitude
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
 
 func GetToken() error {
@@ -104,7 +125,7 @@ func Activites(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	url := "https://test.api.amadeus.com/v1/shopping/activities?latitude=45.74566865353465&longitude=4.837621935365829&radius=1"
+	url := fmt.Sprintf("https://test.api.amadeus.com/v1/shopping/activities?latitude=%f&longitude=%f&radius=1", latitude, longitude)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -136,6 +157,7 @@ func Activites(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(jsonResponse)
 }
+
 func Hotel(w http.ResponseWriter, r *http.Request) {
 	if token == "" {
 		if err := GetToken(); err != nil {
@@ -144,7 +166,7 @@ func Hotel(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	url := "https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=45.74566865353465&longitude=4.837621935365829&radius=5&radiusUnit=KM&hotelSource=ALL"
+	url := fmt.Sprintf("https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=%f&longitude=%f&radius=5&radiusUnit=KM&hotelSource=ALL", latitude, longitude)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -181,7 +203,7 @@ func init() {
 	go func() {
 		for {
 			GetToken()
-			time.Sleep(30 * time.Minute) 
+			time.Sleep(30 * time.Minute)
 		}
 	}()
 }
