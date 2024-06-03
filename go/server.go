@@ -71,6 +71,10 @@ func Server() {
 
 	http.HandleFunc("/loginn", Loginn)
 	http.HandleFunc("/login", Login)
+	http.HandleFunc("/update-coordinates", UpdateCoordinates)
+	http.HandleFunc("/flight", Flight)
+	http.HandleFunc("/activitie", Activites)
+	http.HandleFunc("/hotel", Hotel)
 
 	publicDir := filepath.Join("public")
 
