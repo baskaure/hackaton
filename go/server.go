@@ -33,7 +33,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if authenticated {
-			http.Redirect(w, r, "/home", http.StatusSeeOther)
+			http.Redirect(w, r, "/", http.StatusSeeOther)
 		} else {
 			http.Error(w, "Invalid username or password", http.StatusUnauthorized)
 		}
