@@ -2,6 +2,7 @@ package hackaton
 
 import (
 	"fmt"
+
 	"log"
 	"net/http"
 	"os"
@@ -71,6 +72,7 @@ func Server() {
 
 	http.HandleFunc("/loginn", Loginn)
 	http.HandleFunc("/login", Login)
+	http.HandleFunc("/hotel", Hotel)
 
 	publicDir := filepath.Join("public")
 

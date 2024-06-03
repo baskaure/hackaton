@@ -181,7 +181,7 @@ func init() {
 	go func() {
 		for {
 			GetToken()
-			time.Sleep(30 * time.Minute) 
+			time.Sleep(30 * time.Minute)
 		}
 	}()
 }
