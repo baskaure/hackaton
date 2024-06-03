@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carte Leaflet</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <style>
-        #map { height: 100vh; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ON VA OU</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-    <div id="map"></div>
-    <button id="random-location-btn" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">Localisation aléatoire</button>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-    <a href="/Signup">connexion</a>  
+  <div class="container">
+    <a href="index.html">
+        <img class="logo" src="./static/logo hackaton (2).png" alt="Logo">
+    </a>
+    <a href="/loginn">
+      <img class="profil" class="logo" src="./static/Profil.png" alt="Profil">
+  </a>
+  <button class="button" id="random-location-btn">DESTINATION ALEATOIRE</button>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</div>
 </body>
 </html>
