@@ -38,3 +38,39 @@ randomLocationBtn.addEventListener('click', () => {
     console.error('Error:', error);
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const hotelInfoContainer = document.getElementById("hotel-info");
+
+  fetch('/hotel')
+    .then(response => response.json())
+    .then(data => {
+      const hotels = data.data.slice(0, 5); // Les cinq premiers hôtels dans la réponse JSON
+
+      hotels.forEach(hotel => {
+        // Créer des éléments HTML pour afficher les informations de l'hôtel
+        const hotelContainer = document.createElement('div');
+        hotelContainer.className = 'hotel';
+
+        const hotelName = document.createElement('h2');
+        hotelName.textContent = hotel.name;
+
+        const hotelAddress = document.createElement('p');
+        hotelAddress.textContent = `Country: ${hotel.address.countryCode}`;
+
+        const hotelDistance = document.createElement('p');
+        hotelDistance.textContent = `Distance: ${hotel.distance.value} ${hotel.distance.unit}`;
+
+        // Ajouter les éléments au conteneur de l'hôtel
+        hotelContainer.appendChild(hotelName);
+        hotelContainer.appendChild(hotelAddress);
+        hotelContainer.appendChild(hotelDistance);
+        // Ajouter le conteneur de l'hôtel au conteneur principal
+        hotelInfoContainer.appendChild(hotelContainer);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching hotel data:', error);
+    });
+});

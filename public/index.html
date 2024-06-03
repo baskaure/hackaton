@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ON VA OU</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ON VA OU</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
+
 <body>
   <div class="container">
     <a href="index.html">
@@ -17,17 +24,10 @@
     </a>
     <button class="button" id="random-location-btn">DESTINATION ALEATOIRE</button>
     <div id="map"></div>
-    <div id="info">
-      <h2>Activités à proximité</h2>
-      <ul id="activities-list"></ul>
-      <h2>Hôtels à proximité</h2>
-      <ul id="hotels-list"></ul>
-      <h2>Vols à proximité</h2>
-      <ul id="flights-list"></ul>
-    </div>
+    <div id="hotel-info"></div> <!-- Conteneur pour les informations des hôtels -->
   </div>
-
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
