@@ -1,8 +1,7 @@
-package main
+package hackaton
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -15,15 +14,11 @@ var apiSecret string = "GdnrCuu8RL9PQ2Vu"
 
 var token string = ""
 
-func main() {
+func API1() {
 	http.HandleFunc("/flight", Flight)
 	http.HandleFunc("/activitie", Activites)
 	http.HandleFunc("/hotel", Hotel)
 
-	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
-	fmt.Println("The server is running on port :8080")
-	http.ListenAndServe(":8080", nil)
 }
 
 func GetToken() error {
@@ -182,12 +177,11 @@ func Hotel(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(jsonResponse)
 }
 
-// Optionally, call GetToken periodically to refresh the token
 func init() {
 	go func() {
 		for {
 			GetToken()
-			time.Sleep(30 * time.Minute) // Refresh token every 30 minutes
+			time.Sleep(30 * time.Minute) 
 		}
 	}()
 }
