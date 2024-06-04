@@ -85,7 +85,7 @@ func Activites(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	url := fmt.Sprintf("https://test.api.amadeus.com/v1/shopping/activities?latitude="+strconv.FormatFloat(latitude, 'f', -1, 64)+"&longitude="+strconv.FormatFloat(longitude, 'f', -1, 64)+"&radius=10", latitude, longitude)
+	url := fmt.Sprintf("https://test.api.amadeus.com/v1/shopping/activities?latitude="+strconv.FormatFloat(latitude, 'f', -1, 64)+"&longitude="+strconv.FormatFloat(longitude, 'f', -1, 64)+"&radius=10")
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
