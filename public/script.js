@@ -110,14 +110,18 @@ randomLocationBtn.addEventListener('click', () => {
     })
     .catch(error => {
       console.error('Error fetching hotel data:', error);
+      updateHotelInfo([]); 
     });
 });
 
 function updateHotelInfo(hotels) {
   const hotelInfoContainer = document.getElementById("hotel-info");
-  hotelInfoContainer.innerHTML = "";
+  hotelInfoContainer.innerHTML = ""; 
 
   if (hotels.length === 0) {
+    const noHotelsMessage = document.createElement('p');
+    noHotelsMessage.textContent = "Aucun hôtel trouvé.";
+    hotelInfoContainer.appendChild(noHotelsMessage);
     return;
   }
 
