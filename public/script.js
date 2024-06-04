@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch('/hotel')
     .then(response => response.json())
     .then(data => {
-      const hotels = data.data.slice(0, 5);
+      const hotels = data.data.slice(0, 10);
       updateHotelInfo(hotels); 
     })
     .catch(error => {
