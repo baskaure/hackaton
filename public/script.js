@@ -137,20 +137,16 @@ function updateActivitieInfo(activitie) {
   }
   activitie.forEach(activitie => {
     const activitieContainer = document.createElement('div');
-    activitieContainer.className = 'hotel';
+    activitieContainer.className = 'activitie';
 
     const activitieName = document.createElement('h2');
-    activitieName.textContent = hotel.name;
+    activitieName.textContent = activitie.name;
 
-    const activitieAddress = document.createElement('p');
-    activitieAddress.textContent = `Country: ${activitie.address.countryCode}`;
-
-    const activitieDistance = document.createElement('p');
-    activitieDistance.textContent = `Distance: ${activitie.distance.value} ${activitie.distance.unit}`;
+    const activitieDesc = document.createElement('p');
+    activitieDesc.textContent = activitie.description
 
     activitieContainer.appendChild(activitieName);
-    activitieContainer.appendChild(activitieAddress);
-    activitieContainer.appendChild(activitieDistance);
+    activitieContainer.appendChild(activitieDesc);
     activitieInfoContainer.appendChild(activitieContainer);
   });
 }
