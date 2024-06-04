@@ -112,7 +112,49 @@ randomLocationBtn.addEventListener('click', () => {
       console.error('Error fetching hotel data:', error);
       updateHotelInfo([]); 
     });
+
+    fetch('/activitie')
+    .then(response => response.json())
+    .then(data => {
+      const activitie = data.data.slice(0, 5);
+      updateActiviteInfo(activitie); 
+    })
+    .catch(error => {
+      console.error('Error fetching activite data:', error);
+      updateHotelInfo([]); 
+    });
 });
+
+function updateActivitieInfo(activitie) {
+  const activitieInfoContainer = document.getElementById("activitie-info");
+  activitieInfoContainer.innerHTML = ""; 
+
+  if (activitie.length === 0) {
+    const noActivitieMessage = document.createElement('p');
+    noActivitieMessage.textContent = "Aucune Activité trouvé.";
+    activitieInfoContainer.appendChild(noActivitieMessage);
+    return;
+  }
+  activitie.forEach(activitie => {
+    const activitieContainer = document.createElement('div');
+    activitieContainer.className = 'hotel';
+
+    const activitieName = document.createElement('h2');
+    activitieName.textContent = hotel.name;
+
+    const activitieAddress = document.createElement('p');
+    activitieAddress.textContent = `Country: ${activitie.address.countryCode}`;
+
+    const activitieDistance = document.createElement('p');
+    activitieDistance.textContent = `Distance: ${activitie.distance.value} ${activitie.distance.unit}`;
+
+    activitieContainer.appendChild(activitieName);
+    activitieContainer.appendChild(activitieAddress);
+    activitieContainer.appendChild(activitieDistance);
+    activitieInfoContainer.appendChild(activitieContainer);
+  });
+}
+
 
 function updateHotelInfo(hotels) {
   const hotelInfoContainer = document.getElementById("hotel-info");
@@ -154,5 +196,17 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch(error => {
       console.error('Error fetching hotel data:', error);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch('/activitie')
+    .then(response => response.json())
+    .then(data => {
+      const activitie = data.data.slice(0, 5);
+      updateActivitieInfo(activitie); 
+    })
+    .catch(error => {
+      console.error('Error fetching activitie data:', error);
     });
 });
