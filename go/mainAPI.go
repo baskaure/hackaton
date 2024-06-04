@@ -77,47 +77,6 @@ func GetToken() error {
 	return nil
 }
 
-func Flight(w http.ResponseWriter, r *http.Request) {
-	if token == "" {
-		if err := GetToken(); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-	}
-
-	url := "https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200"
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	req.Header.Set("Authorization", "Bearer "+token)
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	var jsonResponse map[string]interface{}
-	if err := json.Unmarshal(body, &jsonResponse); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(jsonResponse)
-}
-
 func Activites(w http.ResponseWriter, r *http.Request) {
 	if token == "" {
 		if err := GetToken(); err != nil {
