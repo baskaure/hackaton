@@ -58,6 +58,10 @@ function updateHotelInfo(hotels) {
   const hotelInfoContainer = document.getElementById("hotel-info");
   hotelInfoContainer.innerHTML = "";
 
+  if (hotels.length === 0) {
+    return;
+  }
+
   hotels.forEach(hotel => {
     const hotelContainer = document.createElement('div');
     hotelContainer.className = 'hotel';
