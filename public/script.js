@@ -62,7 +62,7 @@ function isPointInPolygon(point, vs) {
     const xj = vs[j][1], yj = vs[j][0];
 
     const intersect = ((yi > y) != (yj > y)) &&
-                      (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+      (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
     if (intersect) inside = !inside;
   }
 
@@ -94,40 +94,40 @@ randomLocationBtn.addEventListener('click', () => {
     },
     body: JSON.stringify({ latitude: randomLatLng[0], longitude: randomLatLng[1] }),
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 
   fetch('/hotel')
     .then(response => response.json())
     .then(data => {
       const hotels = data.data.slice(0, 5);
-      updateHotelInfo(hotels); 
+      updateHotelInfo(hotels);
     })
     .catch(error => {
       console.error('Error fetching hotel data:', error);
-      updateHotelInfo([]); 
+      updateHotelInfo([]);
     });
 
-    fetch('/activitie')
+  fetch('/activitie')
     .then(response => response.json())
     .then(data => {
       const activitie = data.data.slice(0, 5);
-      updateActiviteInfo(activitie); 
+      updateActivitieInfo(activitie);
     })
     .catch(error => {
       console.error('Error fetching activite data:', error);
-      updateHotelInfo([]); 
+      updateActivitieInfo([]);
     });
 });
 
 function updateActivitieInfo(activitie) {
   const activitieInfoContainer = document.getElementById("activitie-info");
-  activitieInfoContainer.innerHTML = ""; 
+  activitieInfoContainer.innerHTML = "";
 
   if (activitie.length === 0) {
     const noActivitieMessage = document.createElement('p');
@@ -143,7 +143,7 @@ function updateActivitieInfo(activitie) {
     activitieName.textContent = activitie.name;
 
     const activitieDesc = document.createElement('p');
-    activitieDesc.textContent = activitie.description
+    activitieDesc.textContent = `Rating: ${activitie.rating}/5`;
 
     activitieContainer.appendChild(activitieName);
     activitieContainer.appendChild(activitieDesc);
@@ -154,7 +154,7 @@ function updateActivitieInfo(activitie) {
 
 function updateHotelInfo(hotels) {
   const hotelInfoContainer = document.getElementById("hotel-info");
-  hotelInfoContainer.innerHTML = ""; 
+  hotelInfoContainer.innerHTML = "";
 
   if (hotels.length === 0) {
     const noHotelsMessage = document.createElement('p');
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(response => response.json())
     .then(data => {
       const hotels = data.data.slice(0, 10);
-      updateHotelInfo(hotels); 
+      updateHotelInfo(hotels);
     })
     .catch(error => {
       console.error('Error fetching hotel data:', error);
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(response => response.json())
     .then(data => {
       const activitie = data.data.slice(0, 5);
-      updateActivitieInfo(activitie); 
+      updateActivitieInfo(activitie);
     })
     .catch(error => {
       console.error('Error fetching activitie data:', error);
