@@ -5,9 +5,41 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 	"text/template"
 )
+
+func Home(w http.ResponseWriter, r *http.Request) {
+	db := InitDB()
+	defer db.Close()
+
+	switch r.Method {
+	case "GET":
+		tmpl, err := template.ParseFiles("./../public/html/index.html")
+		if err != nil {
+			http.Error(w, "Error loading login page", http.StatusInternalServerError)
+			return
+		}
+		tmpl.Execute(w, nil)
+	case "POST":
+		username := r.FormValue("username")
+		password := r.FormValue("password")
+
+		authenticated, err := AuthenticateUser(db, username, password)
+		if err != nil {
+			http.Error(w, "Failed to authenticate user", http.StatusInternalServerError)
+			log.Printf("Error authenticating user: %v", err)
+			return
+		}
+
+		if authenticated {
+			http.Redirect(w, r, "/", http.StatusSeeOther)
+		} else {
+			http.Error(w, "Invalid username or password", http.StatusUnauthorized)
+		}
+	default:
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+	}
+}
 
 func Login(w http.ResponseWriter, r *http.Request) {
 	db := InitDB()
@@ -69,13 +101,9 @@ func Server() {
 		}
 	})
 
+	http.HandleFunc("/", Home)
 	http.HandleFunc("/loginn", Loginn)
 	http.HandleFunc("/login", Login)
-
-	publicDir := filepath.Join("public")
-
-	fs := http.FileServer(http.Dir(publicDir))
-	http.Handle("/", fs)
 
 	port := os.Getenv("PORT")
 	if port == "" {
