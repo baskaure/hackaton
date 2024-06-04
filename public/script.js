@@ -1,4 +1,4 @@
-const map = L.map('map').setView([46.603354, 1.888334], 6); 
+const map = L.map('map').setView([46.603354, 1.888334], 6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
@@ -30,13 +30,13 @@ randomLocationBtn.addEventListener('click', () => {
     },
     body: JSON.stringify({ latitude: lat, longitude: lng }),
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 });
 
 

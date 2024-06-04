@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -125,7 +126,7 @@ func Activites(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	url := fmt.Sprintf("https://test.api.amadeus.com/v1/shopping/activities?latitude=%f&longitude=%f&radius=1", latitude, longitude)
+	url := fmt.Sprintf("https://test.api.amadeus.com/v1/shopping/activities?latitude=%f&longitude=%f&radius=10", latitude, longitude)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -166,7 +167,7 @@ func Hotel(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	url := fmt.Sprintf("https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=%f&longitude=%f&radius=5&radiusUnit=KM&hotelSource=ALL", latitude, longitude)
+	url := fmt.Sprintf("https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=" + strconv.FormatFloat(latitude, 'f', -1, 64) + "&longitude=" + strconv.FormatFloat(longitude, 'f', -1, 64) + "&radius=15&radiusUnit=KM&hotelSource=ALL")
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
