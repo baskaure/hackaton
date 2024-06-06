@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historique de l'Application</title>
     <style>
-        /* Styles CSS */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -36,12 +35,10 @@
 <body>
     <h1>Historique de l'Application</h1>
     <div class="container" id="history-container">
-        <!-- Historique des éléments va être inséré ici -->
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Récupération de l'historique depuis le serveur
             fetch('/history')
                 .then(response => response.json())
                 .then(data => {
