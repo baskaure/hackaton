@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique de l'Application</title>
+    <style>
+        /* Styles CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .history-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .history-item p {
+            margin: 5px 0;
+        }
+        .history-item .timestamp {
+            font-size: 0.8em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Historique de l'Application</h1>
+    <div class="container" id="history-container">
+        <!-- Historique des éléments va être inséré ici -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Récupération de l'historique depuis le serveur
+            fetch('/history')
+                .then(response => response.json())
+                .then(data => {
+                    const historyContainer = document.getElementById('history-container');
+                    if (data && data.length > 0) {
+                        data.forEach(item => {
+                            const historyItem = document.createElement('div');
+                            historyItem.classList.add('history-item');
+                            historyItem.innerHTML = `
+                                <p>Utilisateur ID: ${item.user_id}</p>
+                                <p>Latitude: ${item.latitude}</p>
+                                <p>Longitude: ${item.longitude}</p>
+                                <p class="timestamp">Date: ${item.timestamp}</p>
+                            `;
+                            historyContainer.appendChild(historyItem);
+                        });
+                    } else {
+                        historyContainer.innerHTML = '<p>Aucun élément dans l\'historique pour le moment.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération de l\'historique:', error);
+                });
+        });
+    </script>
+</body>
+</html>
