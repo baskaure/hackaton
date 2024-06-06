@@ -20,47 +20,48 @@ var (
 )
 
 func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
-    if r.Method != "POST" {
-        http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
-        return
-    }
+	if r.Method != "POST" {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
 
-    cookie, err := r.Cookie("user_id")
-    if err != nil {
-        http.Error(w, "User not authenticated", http.StatusUnauthorized)
-        return
-    }
+	// cookie, errcoo := r.Cookie("user_id")
+	// if errcoo != nil {
+	// 	http.Error(w, "User not authenticated", http.StatusUnauthorized)
+	// 	return
+	// }
 
-    userId, err := strconv.Atoi(cookie.Value)
-    if err != nil {
-        http.Error(w, "Invalid user ID", http.StatusBadRequest)
-        return
-    }
+	// userId, errid := strconv.Atoi(cookie.Value)
+	// if errid != nil {
+	// 	http.Error(w, "Invalid user ID", http.StatusBadRequest)
+	// 	return
+	// }
 
-    var coords struct {
-        Latitude  float64 `json:"latitude"`
-        Longitude float64 `json:"longitude"`
-    }
+	var coords struct {
+		Latitude  float64 `json:"latitude"`
+		Longitude float64 `json:"longitude"`
+	}
 
-    err = json.NewDecoder(r.Body).Decode(&coords)
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusBadRequest)
-        return
-    }
+	err := json.NewDecoder(r.Body).Decode(&coords)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	latitude = coords.Latitude
+	longitude = coords.Longitude
 
-    db := InitDB()
-    defer db.Close()
+	db := InitDB()
+	defer db.Close()
 
-    err = InsertHistory(db, userId, coords.Latitude, coords.Longitude)
-    if err != nil {
-        http.Error(w, "Failed to insert history", http.StatusInternalServerError)
-        return
-    }
+	err = InsertHistory(db, 2, coords.Latitude, coords.Longitude)
+	if err != nil {
+		http.Error(w, "Failed to insert history", http.StatusInternalServerError)
+		return
+	}
 
-    w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(map[string]string{"status": "success"})
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
-
 
 func GetToken() error {
 	tokenURL := "https://test.api.amadeus.com/v1/security/oauth2/token"
