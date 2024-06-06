@@ -206,3 +206,17 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error('Error fetching activitie data:', error);
     });
 });
+
+
+alert('Script is loaded'); // This should show up when the page loads
+
+document.getElementById('animation-btn').addEventListener('click', function() {
+  alert('Button clicked!'); // This should show up when the button is clicked
+  var stage = document.getElementById('stage');
+  
+  if (stage.classList.contains('hidden')) {
+    stage.classList.remove('hidden');
+  } else {
+    stage.classList.add('hidden');
+  }
+});

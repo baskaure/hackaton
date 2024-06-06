@@ -1,13 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ON VA OU</title>
-<link rel="stylesheet" href="test.scss">
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ON VA OU</title>
+  <link rel="stylesheet" href="test.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
-    <div class="avatar">
-      <a href="https://codepen.io/MarioDesigns/">
-        <img src="./static/nuage.png" alt="Skytsunami" />
-      </a>
-    </div>
+<body>
+  <button id="animation-btn">Animation</button>
+  <section id="stage" class="stage hidden">
+    <figure class="ball"><span class="shadow"></span></figure>
+  </section>
 
+  <script>
+
+
+    document.getElementById('animation-btn').addEventListener('click', function() {
+
+      var stage = document.getElementById('stage');
+      
+      if (stage.classList.contains('hidden')) {
+        stage.classList.remove('hidden');
+        document.querySelector('.ball').style.animationDuration = '3s';
+        setTimeout(function() {
+          stage.classList.add('hidden');
+        }, 1000); // Hide after 3 seconds
+      } else {
+        stage.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

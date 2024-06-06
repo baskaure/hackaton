@@ -97,7 +97,7 @@ body {
   box-sizing: border-box;
   overflow: hidden;
   transform: translateY(0px);
-  animation: float 6s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 .avatar img {
@@ -116,11 +116,13 @@ body {
 }
 
 .hotel-element, .activite-element {
+  color: white;
   flex: 1;
   margin: 10px;
   padding: 20px;
-  background-color: white;
-  border-radius: 10px;
+  background-color: #C9A2CE;
+  border-radius: 20px;
+  border: 7px solid #b27bba;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   max-height: 300px; /* Ajustez cette hauteur selon vos besoins */
   overflow-y: auto;
@@ -134,6 +136,41 @@ body {
 }
 
 footer {
+  color: white;
   position: absolute;
   TOP: 1200px;
+}
+
+.avatar2 {
+  width: 350px;
+  height: 350px;
+  right: 50px;
+  bottom: -50px;
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+  transform: translateY(0px);
+  animation: float 4s ease-in-out infinite;
+}
+
+.avatar2 img {
+  width: 100%;
+  height: auto;
+}
+
+.avatar3 {
+  width: 350px;
+  height: 350px;
+  left: 30px;
+  bottom: -400px;
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+  transform: translateY(0px);
+  animation: float 4s ease-in-out infinite;
+}
+
+.avatar3 img {
+  width: 100%;
+  height: auto;
 }
