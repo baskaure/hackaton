@@ -69,61 +69,6 @@ function isPointInPolygon(point, vs) {
   return inside;
 }
 
-randomLocationBtn.addEventListener('click', () => {
-  let randomLatLng;
-  do {
-    const lat = 42.51959085499763 + Math.random() * (51.09931136914983 - 42.51959085499763);
-    const lng = -5.142222 + Math.random() * (8.231167 - -5.142222);
-    randomLatLng = [lat, lng];
-  } while (!isPointInPolygon(randomLatLng, francePolygon));
-
-  if (hotelMarker) {
-    map.removeLayer(hotelMarker);
-  }
-
-  hotelMarker = L.marker(randomLatLng).addTo(map)
-    .bindPopup(`Vous avez découvert : [${randomLatLng[0].toFixed(5)}, ${randomLatLng[1].toFixed(5)}]`)
-    .openPopup();
-
-  map.setView(randomLatLng, 10);
-
-  fetch('/update-coordinates', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ user_id: userId, latitude: randomLatLng[0], longitude: randomLatLng[1] }),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-
-  fetch('/hotel')
-    .then(response => response.json())
-    .then(data => {
-      const hotels = data.data.slice(0, 5);
-      updateHotelInfo(hotels);
-    })
-    .catch(error => {
-      console.error('Error fetching hotel data:', error);
-      updateHotelInfo([]);
-    });
-
-  fetch('/activitie')
-    .then(response => response.json())
-    .then(data => {
-      const activitie = data.data.slice(0, 5);
-      updateActivitieInfo(activitie);
-    })
-    .catch(error => {
-      console.error('Error fetching activitie data:', error);
-      updateActivitieInfo([]);
-    });
-});
 
 function updateActivitieInfo(activitie) {
   const activitieInfoContainer = document.getElementById("activitie-info");
@@ -207,16 +152,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
-alert('Script is loaded'); // This should show up when the page loads
-
-document.getElementById('animation-btn').addEventListener('click', function() {
-  alert('Button clicked!'); // This should show up when the button is clicked
-  var stage = document.getElementById('stage');
-  
-  if (stage.classList.contains('hidden')) {
-    stage.classList.remove('hidden');
-  } else {
-    stage.classList.add('hidden');
-  }
-});

@@ -2,12 +2,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ON VA OU</title>
-  <link rel="stylesheet" href="style.scss">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ON VA OU</title>
-  <link rel="stylesheet" href="style.scss">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <div class="avatar">
@@ -21,6 +21,7 @@
 </div>
 <body>
   <div class="background-image"></div>
+  <div class="page-wrapper">
   <div class="container">
     <a href="/">
       <img class="logo" src="./static/logo hackaton (2).png" alt="Logo">
@@ -28,7 +29,100 @@
     <a href="/loginn">
       <img class="profil" src="./static/Profil.png" alt="Profil">
     </a>
-    <button class="button" id="random-location-btn">DESTINATION ALEATOIRE</button>
+    <button class="button" id="animation-btn">DESTINATION ALEATOIRE</button>
+    <section id="stage" class="stage hidden">
+      <figure class="ball"><span class="shadow"></span></figure>
+    </section>
+
+    <script>
+
+
+document.getElementById('animation-btn').addEventListener('click', function() {
+      var pageWrapper = document.querySelector('.page-wrapper');
+      pageWrapper.classList.toggle('dark-bg');
+      
+      var stage = document.getElementById('stage');
+            
+      if (stage.classList.contains('hidden')) {
+        stage.classList.remove('hidden');
+        document.querySelector('.ball').style.animationDuration = '3s';
+        document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
+          element.classList.add('hidden');
+        });
+        setTimeout(function() {
+          stage.classList.add('hidden');
+          pageWrapper.classList.remove('dark-bg'); // Supprimer la classe lorsque l'animation est terminée
+          document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
+            element.classList.remove('hidden');
+          });
+        }, 1000); // Hide after 3 seconds
+      } else {
+        stage.classList.add('hidden');
+        pageWrapper.classList.remove('dark-bg'); // Supprimer la classe si l'animation est annulée
+        document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
+          element.classList.remove('hidden');
+        });
+      }
+
+        console.log('Button clicked!');
+  let randomLatLng;
+  do {
+    const lat = 42.51959085499763 + Math.random() * (51.09931136914983 - 42.51959085499763);
+    const lng = -5.142222 + Math.random() * (8.231167 - -5.142222);
+    randomLatLng = [lat, lng];
+  } while (!isPointInPolygon(randomLatLng, francePolygon));
+
+  if (hotelMarker) {
+    map.removeLayer(hotelMarker);
+  }
+
+  hotelMarker = L.marker(randomLatLng).addTo(map)
+    .bindPopup(`Vous avez découvert : [${randomLatLng[0].toFixed(5)}, ${randomLatLng[1].toFixed(5)}]`)
+    .openPopup();
+
+  map.setView(randomLatLng, 10);
+
+  fetch('/update-coordinates', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ user_id: userId, latitude: randomLatLng[0], longitude: randomLatLng[1] }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+  fetch('/hotel')
+    .then(response => response.json())
+    .then(data => {
+      const hotels = data.data.slice(0, 5);
+      updateHotelInfo(hotels);
+    })
+    .catch(error => {
+      console.error('Error fetching hotel data:', error);
+      updateHotelInfo([]);
+    });
+
+  fetch('/activitie')
+    .then(response => response.json())
+    .then(data => {
+      const activitie = data.data.slice(0, 5);
+      updateActivitieInfo(activitie);
+    })
+    .catch(error => {
+      console.error('Error fetching activitie data:', error);
+      updateActivitieInfo([]);
+    });
+
+      });
+
+    </script>
+
     <div id="map"></div>
 
     <div class="container-menu">
@@ -42,6 +136,8 @@
   </div>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
+</div>
+<script src="script.js"></script>
 </body>
 <footer>
   <p>
