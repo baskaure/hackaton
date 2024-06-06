@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #ffe8c9;
+  background-color: #c2e2eb;
   font-size: 14pt;
 }
 
@@ -12,8 +12,9 @@ body {
   top: 150px;
   border-radius: 30px;
   border: 7px solid #FEB95C;
-  -webkit-box-shadow: 3px 8px 12px #bdbdbd;
-  -moz-box-shadow: 3px 8px 12px #bdbdbd;
+  box-shadow: 3px 8px 12px #8b8b8b;
+  -webkit-box-shadow: 3px 8px 12px #8b8b8b;
+  -moz-box-shadow: 3px 8px 12px #8b8b8b;
 }
 
 .container {
@@ -34,7 +35,7 @@ body {
 
 .button {
   position: absolute;
-  top: 100px; 
+  top: 100px;
   padding: 10px 10px;
   color: white;
   background-color: #FEB95C;
@@ -43,9 +44,9 @@ body {
   cursor: pointer;
   font-size: 17px;
   font-weight: 1000;
-  box-shadow: 3px 8px 12px #bdbdbd;
-  -webkit-box-shadow: 3px 8px 12px #bdbdbd;
-  -moz-box-shadow: 3px 8px 12px #bdbdbd;
+  box-shadow: 3px 8px 12px #8b8b8b;
+  -webkit-box-shadow: 3px 8px 12px #8b8b8b;
+  -moz-box-shadow: 3px 8px 12px #8b8b8b;
 }
 
 .button:hover {
@@ -56,9 +57,9 @@ body {
 .profil {
   width: 4rem;
   height: auto;
-  position: absolute; 
-  top: 20px; 
-  right: 20px; 
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 .background-image {
@@ -104,29 +105,30 @@ body {
   height: auto;
 }
 
-
 .hotel {
-  display: flex; /* Utiliser Flexbox pour aligner les éléments horizontalement */
-  justify-content: center; /* Centrer les éléments */
-  align-items: flex-start; /* Aligner les éléments en haut */
-  width: 80%; /* Ajuster la largeur du conteneur */
-  margin: 20px auto; /* Centrer le conteneur et ajouter de la marge */
-  padding: 20px; /* Ajouter du padding pour un meilleur aspect visuel */
-  border: 2px solid #FEB95C; /* Ajouter une bordure pour visualiser le conteneur */
-  border-radius: 10px; /* Arrondir les coins du conteneur */
-  background-color: #fff; /* Ajouter une couleur de fond */
-  position: relative; /* Modifier de absolute à relative pour éviter le décalage */
-  top: 150px; /* Ajuster cette valeur selon le besoin */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #FEB95C;
+  border-radius: 10px;
+  background-color: #fff;
+  position: relative;
+  top: 150px;
+  overflow-y: auto; /* Ajout de cette ligne pour activer le défilement vertical si nécessaire */
 }
 
-.hotel-element {
+.hotel-element,
+.activite-element {
+  flex-grow: 1;
   font-size: 14px;
-  width: 45%; /* Ajuster la largeur des éléments */
-  padding: 10px; /* Ajouter du padding à chaque élément */
-  box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur totale */
-  border: 1px solid #EA9118; /* Ajouter une bordure pour visualiser les éléments */
-  border-radius: 5px; /* Arrondir les coins des éléments */
-  background-color: #ffe8c9; /* Ajouter une couleur de fond aux éléments */
-  margin: 0 10px; /* Ajouter une marge pour espacer les éléments */
-  align-self: flex-start; /* S'assurer que les éléments sont alignés en haut */
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #EA9118;
+  border-radius: 5px;
+  background-color: #ffe8c9;
+  margin: 10px;
 }
