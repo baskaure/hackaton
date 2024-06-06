@@ -25,17 +25,13 @@ func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// cookie, errcoo := r.Cookie("user_id")
-	// if errcoo != nil {
-	// 	http.Error(w, "User not authenticated", http.StatusUnauthorized)
-	// 	return
-	// }
-
-	// userId, errid := strconv.Atoi(cookie.Value)
-	// if errid != nil {
-	// 	http.Error(w, "Invalid user ID", http.StatusBadRequest)
-	// 	return
-	// }
+	cookie, errcoo := r.Cookie("user_id")
+	if errcoo != nil {
+		http.Error(w, "User not authenticated", http.StatusUnauthorized)
+		return
+	}
+	var val int
+	val, _ = strconv.Atoi(cookie.Value)
 
 	var coords struct {
 		Latitude  float64 `json:"latitude"`
@@ -53,7 +49,7 @@ func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
 	db := InitDB()
 	defer db.Close()
 
-	err = InsertHistory(db, 2, coords.Latitude, coords.Longitude)
+	err = InsertHistory(db, val, coords.Latitude, coords.Longitude)
 	if err != nil {
 		http.Error(w, "Failed to insert history", http.StatusInternalServerError)
 		return
