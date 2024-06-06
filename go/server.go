@@ -34,6 +34,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if authenticated {
+			http.SetCookie(w, &http.Cookie{
+				Name:  "Username",
+				Value: username,
+				Path:  "/",
+			})
 			http.Redirect(w, r, "/", http.StatusSeeOther)
 		} else {
 			http.Error(w, "Invalid username or password", http.StatusUnauthorized)
