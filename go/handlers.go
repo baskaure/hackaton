@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 	"text/template"
 )
 
@@ -37,12 +38,23 @@ func Historique(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-
 func GetHistory(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("user_id")
+	if err != nil {
+		http.Error(w, "User not authenticated", http.StatusUnauthorized)
+		return
+	}
+
+	userId, err := strconv.Atoi(cookie.Value)
+	if err != nil {
+		http.Error(w, "Invalid user ID", http.StatusBadRequest)
+		return
+	}
+
 	db := InitDB()
 	defer db.Close()
 
-	rows, err := db.Query("SELECT user_id, latitude, longitude, timestamp FROM HISTORY")
+	rows, err := db.Query("SELECT latitude, longitude, timestamp FROM HISTORY WHERE user_id = ?", userId)
 	if err != nil {
 		http.Error(w, "Impossible de récupérer l'historique", http.StatusInternalServerError)
 		return
@@ -50,7 +62,6 @@ func GetHistory(w http.ResponseWriter, r *http.Request) {
 	defer rows.Close()
 
 	type HistoryItem struct {
-		UserID    int     `json:"user_id"`
 		Latitude  float64 `json:"latitude"`
 		Longitude float64 `json:"longitude"`
 		Timestamp string  `json:"timestamp"`
@@ -59,7 +70,7 @@ func GetHistory(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 		var item HistoryItem
-		err := rows.Scan(&item.UserID, &item.Latitude, &item.Longitude, &item.Timestamp)
+		err := rows.Scan(&item.Latitude, &item.Longitude, &item.Timestamp)
 		if err != nil {
 			http.Error(w, "Erreur lors de la lecture de l'historique", http.StatusInternalServerError)
 			return

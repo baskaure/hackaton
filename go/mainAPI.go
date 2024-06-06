@@ -12,36 +12,55 @@ import (
 )
 
 var (
-	apiKey    string = "JAA5uTwfT7ThDYxrXFJDVeE79WptQ6FS"
-	apiSecret string = "GdnrCuu8RL9PQ2Vu"
+	apiKey    string = "RqW7sYrd3eoSOTAUPmFTKiYrGLiabqfV"
+	apiSecret string = "BAqvOocpAWXGVbLF"
 	token     string = ""
 	latitude  float64
 	longitude float64
 )
 
 func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
-		return
-	}
+    if r.Method != "POST" {
+        http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+        return
+    }
 
-	var coords struct {
-		Latitude  float64 `json:"latitude"`
-		Longitude float64 `json:"longitude"`
-	}
+    cookie, err := r.Cookie("user_id")
+    if err != nil {
+        http.Error(w, "User not authenticated", http.StatusUnauthorized)
+        return
+    }
 
-	err := json.NewDecoder(r.Body).Decode(&coords)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
+    userId, err := strconv.Atoi(cookie.Value)
+    if err != nil {
+        http.Error(w, "Invalid user ID", http.StatusBadRequest)
+        return
+    }
 
-	latitude = coords.Latitude
-	longitude = coords.Longitude
+    var coords struct {
+        Latitude  float64 `json:"latitude"`
+        Longitude float64 `json:"longitude"`
+    }
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"status": "success"})
+    err = json.NewDecoder(r.Body).Decode(&coords)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+
+    db := InitDB()
+    defer db.Close()
+
+    err = InsertHistory(db, userId, coords.Latitude, coords.Longitude)
+    if err != nil {
+        http.Error(w, "Failed to insert history", http.StatusInternalServerError)
+        return
+    }
+
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
+
 
 func GetToken() error {
 	tokenURL := "https://test.api.amadeus.com/v1/security/oauth2/token"
