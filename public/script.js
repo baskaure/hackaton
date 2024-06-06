@@ -219,5 +219,16 @@ randomTransportBtn.addEventListener('click', () => {
   ];
   let randomTransport = Transport[Math.floor(Math.random() * Transport.length)];
   console.log(randomTransport);
-  document.getElementById("transport").innerHTML = randomTransport;
+
+  const TransportInfoContainer = document.getElementById("transport-info");
+  TransportInfoContainer.innerHTML = "";
+  
+  const TransportContainer = document.createElement('div');
+    TransportContainer.className = 'Transport';
+
+  const TransportName = document.createElement('h2');
+  TransportName.textContent = randomTransport;
+
+  TransportContainer.appendChild(TransportName);
+  TransportInfoContainer.appendChild(TransportContainer);
 });
