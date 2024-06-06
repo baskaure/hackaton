@@ -92,7 +92,7 @@ randomLocationBtn.addEventListener('click', () => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ latitude: randomLatLng[0], longitude: randomLatLng[1] }),
+    body: JSON.stringify({ user_id: userId, latitude: randomLatLng[0], longitude: randomLatLng[1] }),
   })
     .then(response => response.json())
     .then(data => {
@@ -120,7 +120,7 @@ randomLocationBtn.addEventListener('click', () => {
       updateActivitieInfo(activitie);
     })
     .catch(error => {
-      console.error('Error fetching activite data:', error);
+      console.error('Error fetching activitie data:', error);
       updateActivitieInfo([]);
     });
 });

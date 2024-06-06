@@ -26,6 +26,7 @@ func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var coords struct {
+		UserId    int     `json:"user_id"`
 		Latitude  float64 `json:"latitude"`
 		Longitude float64 `json:"longitude"`
 	}
@@ -39,9 +40,19 @@ func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
 	latitude = coords.Latitude
 	longitude = coords.Longitude
 
+	db := InitDB()
+	defer db.Close()
+	
+	err = InsertHistory(db, coords.UserId, latitude, longitude)
+	if err != nil {
+		http.Error(w, "Error saving coordinates to history", http.StatusInternalServerError)
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
+
 
 func GetToken() error {
 	tokenURL := "https://test.api.amadeus.com/v1/security/oauth2/token"
