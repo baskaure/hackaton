@@ -13,7 +13,7 @@ body {
   border-radius: 30px;
   border: 7px solid #FEB95C;
   -webkit-box-shadow: 3px 8px 12px #bdbdbd;
--moz-box-shadow: 3px 8px 12px #bdbdbd;
+  -moz-box-shadow: 3px 8px 12px #bdbdbd;
 }
 
 .container {
@@ -33,32 +33,32 @@ body {
 }
 
 .button {
-position: absolute;
-top: 100px; 
-padding: 10px 10px;
-color: white;
-background-color: #FEB95C;
-border: 5px solid #EA9118;
-border-radius: 30px;
-cursor: pointer;
-font-size: 17px;
-font-weight: 1000;
-box-shadow: 3px 8px 12px #bdbdbd;
--webkit-box-shadow: 3px 8px 12px #bdbdbd;
--moz-box-shadow: 3px 8px 12px #bdbdbd;
+  position: absolute;
+  top: 100px; 
+  padding: 10px 10px;
+  color: white;
+  background-color: #FEB95C;
+  border: 5px solid #EA9118;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 1000;
+  box-shadow: 3px 8px 12px #bdbdbd;
+  -webkit-box-shadow: 3px 8px 12px #bdbdbd;
+  -moz-box-shadow: 3px 8px 12px #bdbdbd;
 }
 
 .button:hover {
-background-color: #c3883c;
-border: 5px solid #a86b14;
+  background-color: #c3883c;
+  border: 5px solid #a86b14;
 }
 
 .profil {
-width: 4rem;
-height: auto;
-position: absolute; 
-top: 20px; 
-right: 20px; 
+  width: 4rem;
+  height: auto;
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
 }
 
 .background-image {
@@ -77,13 +77,13 @@ right: 20px;
 
 @keyframes float {
   0% {
-    transform: translatey(0px);
+    transform: translateY(0px);
   }
   50% {
-    transform: translatey(-20px);
+    transform: translateY(-20px);
   }
   100% {
-    transform: translatey(0px);
+    transform: translateY(0px);
   }
 }
 
@@ -95,7 +95,38 @@ right: 20px;
   position: absolute;
   box-sizing: border-box;
   overflow: hidden;
-  transform: translatey(0px);
+  transform: translateY(0px);
   animation: float 6s ease-in-out infinite;
-  img { width: 100%; height: auto; }
+}
+
+.avatar img {
+  width: 100%;
+  height: auto;
+}
+
+
+.hotel {
+  display: flex; /* Utiliser Flexbox pour aligner les éléments horizontalement */
+  justify-content: center; /* Centrer les éléments */
+  align-items: flex-start; /* Aligner les éléments en haut */
+  width: 80%; /* Ajuster la largeur du conteneur */
+  margin: 20px auto; /* Centrer le conteneur et ajouter de la marge */
+  padding: 20px; /* Ajouter du padding pour un meilleur aspect visuel */
+  border: 2px solid #FEB95C; /* Ajouter une bordure pour visualiser le conteneur */
+  border-radius: 10px; /* Arrondir les coins du conteneur */
+  background-color: #fff; /* Ajouter une couleur de fond */
+  position: relative; /* Modifier de absolute à relative pour éviter le décalage */
+  top: 150px; /* Ajuster cette valeur selon le besoin */
+}
+
+.hotel-element {
+  font-size: 14px;
+  width: 45%; /* Ajuster la largeur des éléments */
+  padding: 10px; /* Ajouter du padding à chaque élément */
+  box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur totale */
+  border: 1px solid #EA9118; /* Ajouter une bordure pour visualiser les éléments */
+  border-radius: 5px; /* Arrondir les coins des éléments */
+  background-color: #ffe8c9; /* Ajouter une couleur de fond aux éléments */
+  margin: 0 10px; /* Ajouter une marge pour espacer les éléments */
+  align-self: flex-start; /* S'assurer que les éléments sont alignés en haut */
 }
