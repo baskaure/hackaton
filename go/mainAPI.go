@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	apiKey    string = "JAA5uTwfT7ThDYxrXFJDVeE79WptQ6FS"
-	apiSecret string = "GdnrCuu8RL9PQ2Vu"
+	apiKey    string = "RqW7sYrd3eoSOTAUPmFTKiYrGLiabqfV"
+	apiSecret string = "BAqvOocpAWXGVbLF"
 	token     string = ""
 	latitude  float64
 	longitude float64

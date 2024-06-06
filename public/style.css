@@ -3,6 +3,8 @@ body {
   text-align: center;
   background-color: #FEDCDA;
   font-size: 14pt;
+  position: relative;
+  /* Ensure relative positioning for the body */
 }
 
 #map {
@@ -22,36 +24,47 @@ body {
 }
 
 .logo {
-width: 350px;
-height: auto;
-margin-top: 20px;
-margin-bottom: 20px;
+  width: 350px;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .button {
-padding: 10px 10px;
-color: white;
-background-color: #FEB95C;
-border: 5px solid #EA9118;
-border-radius: 30px;
-cursor: pointer;
-font-size: 17px;
-font-weight: 1000;
-box-shadow: 3px 8px 12px #bdbdbd;
--webkit-box-shadow: 3px 8px 12px #bdbdbd;
--moz-box-shadow: 3px 8px 12px #bdbdbd;
-margin-bottom: 10px;
+  padding: 10px 10px;
+  color: white;
+  background-color: #FEB95C;
+  border: 5px solid #EA9118;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 1000;
+  box-shadow: 3px 8px 12px #bdbdbd;
+  -webkit-box-shadow: 3px 8px 12px #bdbdbd;
+  -moz-box-shadow: 3px 8px 12px #bdbdbd;
+  margin-bottom: 10px;
 }
 
 .button:hover {
-background-color: #c3883c;
-border: 5px solid #a86b14;
+  background-color: #c3883c;
+  border: 5px solid #a86b14;
 }
 
-.profil {
-width: 4rem;
-height: auto;
-position: absolute; 
-top: 20px; 
-right: 20px; 
+.profile-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.profil,
+.addprofil {
+  width: 4rem;
+  height: auto;
+}
+
+.addprofil {
+  margin-right: 20px;
+  /* Add some space between the images */
 }
