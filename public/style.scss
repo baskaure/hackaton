@@ -105,30 +105,35 @@ body {
   height: auto;
 }
 
-.hotel {
+.container-menu {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
-  margin: 20px auto;
-  padding: 20px;
-  border: 2px solid #FEB95C;
-  border-radius: 10px;
-  background-color: #fff;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
   position: relative;
   top: 150px;
-  overflow-y: auto; /* Ajout de cette ligne pour activer le défilement vertical si nécessaire */
+  margin-bottom: 20px;
 }
 
-.hotel-element,
-.activite-element {
-  flex-grow: 1;
-  font-size: 14px;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #EA9118;
-  border-radius: 5px;
-  background-color: #ffe8c9;
+.hotel-element, .activite-element {
+  flex: 1;
   margin: 10px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 300px; /* Ajustez cette hauteur selon vos besoins */
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.hotel-element p, .activite-element p {
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+footer {
+  position: absolute;
+  TOP: 1200px;
 }
