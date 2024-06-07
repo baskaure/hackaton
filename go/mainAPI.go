@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	apiKey    string = "JAA5uTwfT7ThDYxrXFJDVeE79WptQ6FS"
-	apiSecret string = "GdnrCuu8RL9PQ2Vu"
+	apiKey    string = "RqW7sYrd3eoSOTAUPmFTKiYrGLiabqfV"
+	apiSecret string = "BAqvOocpAWXGVbLF"
 	token     string = ""
 	latitude  float64
 	longitude float64
@@ -25,8 +25,15 @@ func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	cookie, errcoo := r.Cookie("user_id")
+	if errcoo != nil {
+		http.Error(w, "User not authenticated", http.StatusUnauthorized)
+		return
+	}
+	var val int
+	val, _ = strconv.Atoi(cookie.Value)
+
 	var coords struct {
-		UserId    int     `json:"user_id"`
 		Latitude  float64 `json:"latitude"`
 		Longitude float64 `json:"longitude"`
 	}
@@ -36,23 +43,21 @@ func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-
 	latitude = coords.Latitude
 	longitude = coords.Longitude
 
 	db := InitDB()
 	defer db.Close()
-	
-	err = InsertHistory(db, coords.UserId, latitude, longitude)
+
+	err = InsertHistory(db, val, coords.Latitude, coords.Longitude)
 	if err != nil {
-		http.Error(w, "Error saving coordinates to history", http.StatusInternalServerError)
+		http.Error(w, "Failed to insert history", http.StatusInternalServerError)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
-
 
 func GetToken() error {
 	tokenURL := "https://test.api.amadeus.com/v1/security/oauth2/token"

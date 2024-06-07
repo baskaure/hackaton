@@ -25,7 +25,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		username := r.FormValue("username")
 		password := r.FormValue("password")
 
-		authenticated, err := AuthenticateUser(db, username, password)
+		userId, authenticated, err := AuthenticateUser(db, username, password)
 		if err != nil {
 			http.Error(w, "Failed to authenticate user", http.StatusInternalServerError)
 			log.Printf("Error authenticating user: %v", err)
@@ -33,6 +33,14 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if authenticated {
+			cookie := http.Cookie{
+				Name:     "user_id",
+				Value:    fmt.Sprintf("%d", userId),
+				Path:     "/",
+				HttpOnly: true,
+				MaxAge:   3600,
+			}
+			http.SetCookie(w, &cookie)
 			http.Redirect(w, r, "/", http.StatusSeeOther)
 		} else {
 			http.Error(w, "Invalid username or password", http.StatusUnauthorized)
@@ -74,6 +82,8 @@ func Server() {
 	http.HandleFunc("/update-coordinates", UpdateCoordinates)
 	http.HandleFunc("/activitie", Activites)
 	http.HandleFunc("/hotel", Hotel)
+	http.HandleFunc("/history", GetHistory)
+	http.HandleFunc("/historique", Historique)
 
 	publicDir := filepath.Join("public")
 
