@@ -33,7 +33,7 @@ go run main.go
 the click [here](http://localhost:8080/) It will be on the terminal of vs code also.
 
 ## Authors
-- [@Jeremie](https://github.com/Wataru335)
+- [@Jérémie](https://github.com/Wataru335)
 - [@Dany](https://github.com/KDOras)
 - [@Mathis](https://github.com/VeldrX)
 - [@Aurélien](https://github.com/baskaure)
