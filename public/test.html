@@ -1,35 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ON VA OU</title>
-  <link rel="stylesheet" href="test.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-</head>
-<body>
-  <button id="animation-btn">Animation</button>
-  <section id="stage" class="stage hidden">
-    <figure class="ball"><span class="shadow"></span></figure>
-  </section>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ON VA OU</title>
+<link rel="stylesheet" href="test.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-  <script>
-
-
-    document.getElementById('animation-btn').addEventListener('click', function() {
-
-      var stage = document.getElementById('stage');
-      
-      if (stage.classList.contains('hidden')) {
-        stage.classList.remove('hidden');
-        document.querySelector('.ball').style.animationDuration = '3s';
-        setTimeout(function() {
-          stage.classList.add('hidden');
-        }, 1000); // Hide after 3 seconds
-      } else {
-        stage.classList.add('hidden');
-      }
-    });
-  </script>
-</body>
-</html>
+<nav>
+  <ul>
+    <li class="deroulant"><a href="#">Choisir le rayon de recherche &ensp;</a>
+      <ul class="sous">
+        <li><a href="#">5KM</a></li>
+        <li><a href="#">10KM</a></li>
+        <li><a href="#">15KM</a></li>
+        <li><a href="#">20KM</a></li>
+      </ul>
+    </li>
+  </ul>

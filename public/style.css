@@ -111,8 +111,9 @@ body {
   width: 100%;
   margin-top: 20px;
   position: relative;
-  top: 150px;
+  top: 205px;
   margin-bottom: 20px;
+  z-index: 100;
 }
 
 .hotel-element, .activite-element {
@@ -127,6 +128,7 @@ body {
   max-height: 300px; /* Ajustez cette hauteur selon vos besoins */
   overflow-y: auto;
   margin-bottom: 20px;
+  z-index: 100;
 }
 
 .hotel-element p, .activite-element p {
@@ -138,7 +140,7 @@ body {
 footer {
   color: white;
   position: absolute;
-  TOP: 1200px;
+  top: 1200px;
 }
 
 .avatar2 {
@@ -174,7 +176,6 @@ footer {
   width: 100%;
   height: auto;
 }
-
 
 .hidden {
   display: none !important;
@@ -247,8 +248,143 @@ footer {
   }
 }
 
-
-
 .hidden {
   display: none !important;
+}
+
+nav {
+  width: 100%;
+  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center; /* Centrer les éléments du menu horizontalement */
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  text-align: center;
+  position: relative;
+}
+
+nav a {
+  background-color: #FEB95C;
+  border: 5px solid #EA9118;
+  border-radius: 10px;
+  display: block;
+  text-decoration: none;
+  color: white;
+  border-bottom: 5px solid #EA9118;
+  padding: 17px 20px; /* Ajustez le padding selon vos besoins */
+  font-size: 17px;
+  font-weight: 1000;
+}
+
+nav a:hover {
+  background-color: #b27bba;
+  color: white;
+  border: 5px solid #8e6195;
+  border-bottom: 5px solid #8e6195;
+}
+
+.sous {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 5500; /* Augmenter la valeur du z-index pour donner la priorité au menu déroulant */
+  border-bottom: 5px solid transparent;
+  box-shadow: 3px 8px 12px #8b8b8b;
+  -webkit-box-shadow: 3px 8px 12px #8b8b8b;
+  -moz-box-shadow: 3px 8px 12px #8b8b8b;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+nav > ul li:hover .sous {
+  display: block;
+}
+
+.sous li {
+  float: none;
+  width: 100%;
+  text-align: left;
+  z-index: 5500;
+  box-shadow: 3px 8px 12px #8b8b8b;
+  -webkit-box-shadow: 3px 8px 12px #8b8b8b;
+  -moz-box-shadow: 3px 8px 12px #8b8b8b;
+}
+
+.sous a {
+  padding: 10px;
+  border-bottom: none;
+  border-radius: 0px;
+  border: 5px solid transparent;
+  border-bottom: 2px solid #faa639;
+  z-index: 5500;
+  box-shadow: 3px 8px 12px #8b8b8b;
+  -webkit-box-shadow: 3px 8px 12px #8b8b8b;
+  -moz-box-shadow: 3px 8px 12px #8b8b8b;
+}
+
+.sous a:hover {
+  border-bottom: none;
+  background-color: #b27bba;
+  border-radius: 0px;
+  border-bottom: 5px solid #8e6195;
+  z-index: 5500;
+  box-shadow: 3px 8px 12px #8b8b8b;
+  -webkit-box-shadow: 3px 8px 12px #8b8b8b;
+  -moz-box-shadow: 3px 8px 12px #8b8b8b;
+}
+
+/* Target the first and last items of the dropdown */
+.sous li:first-child a {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.sous li:last-child a {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.deroulant > a::after {
+  content: " ▼";
+  font-size: 12px;
+}
+
+.conteneur {
+  margin: 50px 20px;
+  height: 1500px;
+}
+
+.contener-sous {
+  z-index: 5500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 690px;
+}
+
+.bouton-historique {
+  margin-left: 10px;
+  color: white;
+  background-color: #FEB95C;
+  border: 5px solid #EA9118;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 1000;
+  padding: 0px 10px; /* Ajustez la valeur de la marge en haut et en bas ici */
 }
