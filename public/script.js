@@ -4,6 +4,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const randomLocationBtn = document.getElementById('random-location-btn');
+const randomTransportBtn = document.getElementById('random-transport-btn');
 let hotelMarker = null;
 
 const francePolygon = [
@@ -205,4 +206,29 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => {
       console.error('Error fetching activitie data:', error);
     });
+});
+
+randomTransportBtn.addEventListener('click', () => {
+  Transport = [
+    "Voiture",
+    "Avion",
+    "Train",
+    "Bus",
+    "Vélo",
+    "Marche"
+  ];
+  let randomTransport = Transport[Math.floor(Math.random() * Transport.length)];
+  console.log(randomTransport);
+
+  const TransportInfoContainer = document.getElementById("transport-info");
+  TransportInfoContainer.innerHTML = "";
+  
+  const TransportContainer = document.createElement('div');
+    TransportContainer.className = 'Transport';
+
+  const TransportName = document.createElement('h2');
+  TransportName.textContent = randomTransport;
+
+  TransportContainer.appendChild(TransportName);
+  TransportInfoContainer.appendChild(TransportContainer);
 });
