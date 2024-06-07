@@ -1,5 +1,5 @@
 
-## On Va Où ? 🎶
+## On Va Où ? 🏖️
 
 On Va Où is a website where we can find a random destination in France.
 The site also allows us to have Hotels and activities more or less close to the location found.
