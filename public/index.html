@@ -51,14 +51,14 @@ document.getElementById('animation-btn').addEventListener('click', function() {
         });
         setTimeout(function() {
           stage.classList.add('hidden');
-          pageWrapper.classList.remove('dark-bg'); // Supprimer la classe lorsque l'animation est terminée
+          pageWrapper.classList.remove('dark-bg'); 
           document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
             element.classList.remove('hidden');
           });
-        }, 1000); // Hide after 3 seconds
+        }, 1000); 
       } else {
         stage.classList.add('hidden');
-        pageWrapper.classList.remove('dark-bg'); // Supprimer la classe si l'animation est annulée
+        pageWrapper.classList.remove('dark-bg'); 
         document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
           element.classList.remove('hidden');
         });
