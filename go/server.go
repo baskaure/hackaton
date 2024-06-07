@@ -79,6 +79,7 @@ func Server() {
 
 	http.HandleFunc("/loginn", Loginn)
 	http.HandleFunc("/login", Login)
+	http.HandleFunc("/update-radius", updateRadiusHandler)
 	http.HandleFunc("/update-coordinates", UpdateCoordinates)
 	http.HandleFunc("/activitie", Activites)
 	http.HandleFunc("/hotel", Hotel)

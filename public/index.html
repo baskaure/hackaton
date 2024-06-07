@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <div class="avatar">
-    <img src="./static/nuage.png" alt="Skytsunami" />
+  <img src="./static/nuage.png" alt="Skytsunami" />
 </div>
 <div class="avatar2">
   <img src="./static/nuage.png" alt="Skytsunami" />
@@ -19,22 +19,23 @@
 <div class="avatar3">
   <img src="./static/nuage.png" alt="Skytsunami" />
 </div>
+
 <body>
   <div class="background-image"></div>
   <div class="page-wrapper">
-  <div class="container">
-    <a href="/">
-      <img class="logo" src="./static/logo hackaton (2).png" alt="Logo">
-    </a>
-    <a href="/loginn">
-      <img class="profil" src="./static/Profil.png" alt="Profil">
-    </a>
-    <button class="button" id="animation-btn">DESTINATION ALEATOIRE</button>
-    <section id="stage" class="stage hidden">
-      <figure class="ball"><span class="shadow"></span></figure>
-    </section>
+    <div class="container">
+      <a href="/">
+        <img class="logo" src="./static/logo hackaton (2).png" alt="Logo">
+      </a>
+      <a href="/loginn">
+        <img class="profil" src="./static/Profil.png" alt="Profil">
+      </a>
+      <button class="button" id="animation-btn">DESTINATION ALEATOIRE</button>
+      <section id="stage" class="stage hidden">
+        <figure class="ball"><span class="shadow"></span></figure>
+      </section>
 
-    <script>
+      <script>
 
 
 document.getElementById('animation-btn').addEventListener('click', function() {
@@ -65,41 +66,44 @@ document.getElementById('animation-btn').addEventListener('click', function() {
       }
     });
 
-    </script>
+      </script>
 
-    <div id="map"></div>
-    
-    <div class="contener-sous">
-    <nav>
-      <ul>
-        <li class="deroulant"><a href="#">Choisir le rayon de recherche &ensp;</a>
-          <ul class="sous">
-            <li><a href="#">5KM</a></li>
-            <li><a href="#">10KM</a></li>
-            <li><a href="#">15KM</a></li>
-            <li><a href="#">20KM</a></li>
+      <div id="map"></div>
+
+      <div class="contener-sous">
+        <nav>
+          <ul>
+            <li class="deroulant"><a href="#">Choisir le rayon de recherche &ensp;</a>
+              <ul class="sous">
+                <li><a href="#" data-radius="5">5KM</a></li>
+                <li><a href="#" data-radius="10">10KM</a></li>
+                <li><a href="#" data-radius="15">15KM</a></li>
+                <li><a href="#" data-radius="20">20KM</a></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-      </ul>
-      <a href="/historique" class="bouton-historique">
-        <p>Historique</p>
-      </a>
+          <a href="/historique" class="bouton-historique">
+            <p>Historique</p>
+          </a>
 
-    </div>
+          <button class="bouton-historique" id="random-transport-btn">Transport Aléatoire</button>
+          <div id="transport-info"></div>
 
-    <div class="container-menu">
-      <div id="hotel-info" class="hotel-element">
-        <p>HOTEL</p>
       </div>
-      <div id="activitie-info" class="activite-element">
-        <p>ACTIVITES</p>
+
+      <div class="container-menu">
+        <div id="hotel-info" class="hotel-element">
+          <p>HOTEL</p>
+        </div>
+        <div id="activitie-info" class="activite-element">
+          <p>ACTIVITES</p>
+        </div>
       </div>
     </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
   </div>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
-</div>
-<script src="script.js"></script>
 </body>
 <footer>
   <p>

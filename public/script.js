@@ -215,3 +215,30 @@ function toggleMenu() {
     menu.style.display = 'block';
   }
 }
+
+document.querySelectorAll('.sous li a').forEach(function (element) {
+  element.addEventListener('click', function (event) {
+    event.preventDefault();
+    var radius = parseInt(this.getAttribute('data-radius'));
+    // Mise à jour de la variable radius sur le serveur
+    updateRadius(radius);
+  });
+});
+
+function updateRadius(newRadius) {
+  fetch('/update-radius', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ radius: newRadius })
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log("Le nouveau rayon de recherche est: " + newRadius + "KM");
+      } else {
+        console.error('Erreur lors de la mise à jour du rayon');
+      }
+    })
+    .catch(error => console.error('Erreur:', error));
+}

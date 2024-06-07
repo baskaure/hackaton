@@ -17,7 +17,29 @@ var (
 	token     string = ""
 	latitude  float64
 	longitude float64
+	radius    int
 )
+
+func updateRadiusHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var data struct {
+		Radius int `json:"radius"`
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&data)
+	if err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+
+	radius = data.Radius
+	fmt.Printf("Updated radius: %d KM\n", radius)
+	w.WriteHeader(http.StatusOK)
+}
 
 func UpdateCoordinates(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
@@ -101,7 +123,7 @@ func Activites(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	url := fmt.Sprintf("https://test.api.amadeus.com/v1/shopping/activities?latitude=" + strconv.FormatFloat(latitude, 'f', -1, 64) + "&longitude=" + strconv.FormatFloat(longitude, 'f', -1, 64) + "&radius=10")
+	url := fmt.Sprintf("https://test.api.amadeus.com/v1/shopping/activities?latitude=" + strconv.FormatFloat(latitude, 'f', -1, 64) + "&longitude=" + strconv.FormatFloat(longitude, 'f', -1, 64) + "&radius=" + strconv.Itoa(radius))
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -142,7 +164,7 @@ func Hotel(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	url := fmt.Sprintf("https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=" + strconv.FormatFloat(latitude, 'f', -1, 64) + "&longitude=" + strconv.FormatFloat(longitude, 'f', -1, 64) + "&radius=15&radiusUnit=KM&hotelSource=ALL")
+	url := fmt.Sprintf("https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=" + strconv.FormatFloat(latitude, 'f', -1, 64) + "&longitude=" + strconv.FormatFloat(longitude, 'f', -1, 64) + "&radius=" + strconv.Itoa(radius) + "&radiusUnit=KM&hotelSource=ALL")
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
