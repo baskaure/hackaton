@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ON VA OU</title>
+    <link rel="stylesheet" href="./login.css">
+    <link rel="icon" type="logo/png" href="./static/logo hackaton (2).png">
+</head>
+<header>
+    <form method="POST" action="/">
+        <button class="retour">RETOUR</button>
+    </form>
+</header>
+<body>
+    <div class="background-image"></div>
+    <div class="logo-container">
+        <a href="/">
+            <img src="./static/logo hackaton (2).png" alt="Logo">
+        </a>
+    </div> 
+    <div class="avatar2">
+        <img src="./static/nuage.png" alt="Skytsunami" />
+      </div>
+      <div class="avatar3">
+        <img src="./static/nuage.png" alt="Skytsunami" />
+      </div> 
+      <div class="content-container2">
+        <div class="container">
+        <p class="titre">S'INSCRIRE</p>
+        <form action="/Signup" method="post">
+            <div class="input-group">
+                <input type="text" id="newUsername" name="newUsername" placeholder="PSEUDO OU EMAIL" required>
+            </div>
+            <div class="input-group">
+                <input type="email" id="newEmail" name="newEmail" placeholder="EMAIL" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="newPassword" name="newPassword" placeholder="MOT DE PASSE" required>
+                <button type="submit" class="inscription">S'INSCRIRE</button>
+            </div>
+            <p><a href="/loginn" class="connection">CONNECTION</a></p>
+        </form>
+    </div>
+</body>
+</html>

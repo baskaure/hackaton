@@ -1,25 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ON VA OU</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ON VA OU</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
-<body>
-  <div class="container">
-    <a href="index.html">
-        <img class="logo" src="./static/logo hackaton (2).png" alt="Logo">
-    </a>
-    <a href="login.html">
-      <img class="profil" class="logo" src="./static/Profil.png" alt="Profil">
-  </a>
-  <button class="button" id="random-location-btn">DESTINATION ALEATOIRE</button>
-  <div id="map"></div>
+<div class="avatar">
+  <img src="./static/nuage.png" alt="Skytsunami" />
+</div>
+<div class="avatar2">
+  <img src="./static/nuage.png" alt="Skytsunami" />
+</div>
+<div class="avatar3">
+  <img src="./static/nuage.png" alt="Skytsunami" />
+</div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<body>
+  <div class="background-image"></div>
+  <div class="page-wrapper">
+    <div class="container">
+      <a href="/">
+        <img class="logo" src="./static/logo hackaton (2).png" alt="Logo">
+      </a>
+      <a href="/loginn">
+        <img class="profil" src="./static/Profil.png" alt="Profil">
+      </a>
+      <button class="button" id="animation-btn">DESTINATION ALEATOIRE</button>
+      <section id="stage" class="stage hidden">
+        <figure class="ball"><span class="shadow"></span></figure>
+      </section>
+
+      <script>
+
+
+        document.getElementById('animation-btn').addEventListener('click', function () {
+          var pageWrapper = document.querySelector('.page-wrapper');
+          pageWrapper.classList.toggle('dark-bg');
+
+          var stage = document.getElementById('stage');
+
+          if (stage.classList.contains('hidden')) {
+            stage.classList.remove('hidden');
+            document.querySelector('.ball').style.animationDuration = '3s';
+            document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function (element) {
+              element.classList.add('hidden');
+            });
+            setTimeout(function () {
+              stage.classList.add('hidden');
+              pageWrapper.classList.remove('dark-bg');
+              document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function (element) {
+                element.classList.remove('hidden');
+              });
+            }, 1000);
+          } else {
+            stage.classList.add('hidden');
+            pageWrapper.classList.remove('dark-bg');
+            document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function (element) {
+              element.classList.remove('hidden');
+            });
+          }
+        });
+
+      </script>
+
+      <div id="map"></div>
+
+      <div class="contener-sous">
+        <nav>
+          <ul>
+            <li class="deroulant"><a href="#">Choisir le rayon de recherche &ensp;</a>
+              <ul class="sous">
+                <li><a href="#" data-radius="5">5KM</a></li>
+                <li><a href="#" data-radius="10">10KM</a></li>
+                <li><a href="#" data-radius="15">15KM</a></li>
+                <li><a href="#" data-radius="20">20KM</a></li>
+              </ul>
+            </li>
+          </ul>
+          <a href="/historique" class="bouton-historique">
+            <p>Historique</p>
+          </a>
+
+
+
+      </div>
+
+      <div class="container-menu">
+        <div id="hotel-info" class="hotel-element">
+          <p>HOTEL</p>
+        </div>
+        <div id="activitie-info" class="activite-element">
+          <p>ACTIVITES</p>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+  </div>
   <script src="script.js"></script>
 </div>
 </body>
+<footer>
+  <p>
+    © Copyright - By Aurélien, Mathis, Jeremie, Dany - 2024 Ynov.
+  </p>
+</footer>
+
 </html>

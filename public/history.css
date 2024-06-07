@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #c2e2eb;
+    font-size: 14pt;
+}
+.titre {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 1000;
+    background-color: #FEB95C;
+    border: 5px solid #EA9118;
+    border-radius: 20px;
+    padding: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.history-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.history-item p {
+    margin: 5px 0;
+}
+.history-item .timestamp {
+    font-size: 0.8em;
+    color: #666;
+}
+
+@keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+
+.avatar2 {
+    width: 400px;
+    height: 400px;
+    right: -30px;
+    top: -50px;
+    position: absolute;
+    box-sizing: border-box;
+    overflow: hidden;
+    transform: translateY(0px);
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .avatar2 img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .avatar3 {
+    width: 400px;
+    height: 400px;
+    left: -50px;
+    bottom: -250px;
+    position: absolute;
+    box-sizing: border-box;
+    overflow: hidden;
+    transform: translateY(0px);
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .avatar3 img {
+    width: 100%;
+    height: auto;
+  }
+
+  .titre {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 1000;
+    background-color: #FEB95C;
+    border: 5px solid #EA9118;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px; /* Ajoute une marge en haut pour séparer le titre du logo */
+  }
+  
+  .logo-container {
+    position: relative; /* Ajoutez cette propriété pour que la position absolue fonctionne correctement */
+  }
+  
+  .logo-container img {
+    width: 350px;
+    height: auto;
+  }
+  
+  .retour {
+    position: absolute; 
+    top: 20px; 
+    left: 20px; 
+    text-decoration: none;
+    padding: 7px 70px;
+    color: #FFFFFF;
+    background-color: #FEB95C;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border: 7px solid #EA9118;
+    box-shadow: 3px 8px 12px #8b8b8b;
+    -webkit-box-shadow: 3px 8px 12px #8b8b8b;
+    -moz-box-shadow: 3px 8px 12px #8b8b8b;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 1000;
+    letter-spacing: -1px;
+    font-family: 'Lilita One', sans-serif; 
+  }
+  
+  .retour:hover {
+    background-color: #D292D0;
+    border: 7px solid #B97EB7;
+  }
+  

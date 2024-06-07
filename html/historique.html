@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ON VA OU</title>
+    <link rel="stylesheet" href="history.css">
+    <title>Historique de l'Application</title>
+
+        <form method="POST" action="/">
+            <button class="retour">RETOUR</button>
+        </form>
+
+</head>
+<body>
+    <div class="logo-container">
+        <a href="/">
+            <img src="./static/logo hackaton (2).png" alt="Logo">
+        </a>
+    </div> 
+    <div class="avatar2">
+        <img src="./static/nuage.png" alt="Skytsunami" />
+      </div>
+      <div class="avatar3">
+        <img src="./static/nuage.png" alt="Skytsunami" />
+      </div> 
+    <p class="titre">Historique de l'Application</p>
+    <div class="container" id="history-container">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/history')
+                .then(response => response.json())
+                .then(data => {
+                    const historyContainer = document.getElementById('history-container');
+                    if (data && data.length > 0) {
+                        data.forEach(item => {
+                            const historyItem = document.createElement('div');
+                            historyItem.classList.add('history-item');
+                            historyItem.innerHTML = `
+                                <p>Latitude: ${item.latitude}</p>
+                                <p>Longitude: ${item.longitude}</p>
+                                <p class="timestamp">Date: ${item.timestamp}</p>
+                            `;
+                            historyContainer.appendChild(historyItem);
+                        });
+                    } else {
+                        historyContainer.innerHTML = '<p>Aucun élément dans l\'historique pour le moment.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération de l\'historique:', error);
+                });
+        });
+    </script>
+</body>
+</html>
