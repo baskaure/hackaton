@@ -2,6 +2,7 @@ package hackaton
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -37,10 +38,20 @@ func InitDB() *sql.DB {
 }
 
 func InsertUser(db *sql.DB, username, email, password string) error {
+	var exists bool
+	err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM USER WHERE pseudo = ?)", username).Scan(&exists)
+	if err != nil {
+		return err
+	}
+	if exists {
+		return fmt.Errorf("pseudo already exists")
+	}
+
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
 	}
+
 	stmt, err := db.Prepare("INSERT INTO USER (pseudo, email, password) VALUES (?, ?, ?)")
 	if err != nil {
 		return err

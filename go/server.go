@@ -68,10 +68,15 @@ func Server() {
 			email := r.FormValue("newEmail")
 			password := r.FormValue("newPassword")
 			if err := InsertUser(db, username, email, password); err != nil {
-				http.Error(w, "Failed to insert user", http.StatusInternalServerError)
-				log.Printf("Error inserting user: %v", err)
+				if err.Error() == "pseudo already exists" {
+					http.Error(w, "Pseudo already exists. Please choose another one.", http.StatusConflict)
+				} else {
+					http.Error(w, "Failed to insert user", http.StatusInternalServerError)
+					log.Printf("Error inserting user: %v", err)
+				}
 				return
 			}
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
