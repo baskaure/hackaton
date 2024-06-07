@@ -12,12 +12,12 @@ import (
 )
 
 var (
-	apiKey    string = "RqW7sYrd3eoSOTAUPmFTKiYrGLiabqfV"
-	apiSecret string = "BAqvOocpAWXGVbLF"
+	apiKey    string = "A3FGwGtaXvep9RKix1vLhjrNxbzWZ1In"
+	apiSecret string = "IQ0twTTC58iIgUYL"
 	token     string = ""
 	latitude  float64
 	longitude float64
-	radius    int
+	radius    int = 10
 )
 
 func updateRadiusHandler(w http.ResponseWriter, r *http.Request) {

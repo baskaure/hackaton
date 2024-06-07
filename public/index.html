@@ -38,33 +38,33 @@
       <script>
 
 
-document.getElementById('animation-btn').addEventListener('click', function() {
-      var pageWrapper = document.querySelector('.page-wrapper');
-      pageWrapper.classList.toggle('dark-bg');
-      
-      var stage = document.getElementById('stage');
-            
-      if (stage.classList.contains('hidden')) {
-        stage.classList.remove('hidden');
-        document.querySelector('.ball').style.animationDuration = '3s';
-        document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
-          element.classList.add('hidden');
+        document.getElementById('animation-btn').addEventListener('click', function () {
+          var pageWrapper = document.querySelector('.page-wrapper');
+          pageWrapper.classList.toggle('dark-bg');
+
+          var stage = document.getElementById('stage');
+
+          if (stage.classList.contains('hidden')) {
+            stage.classList.remove('hidden');
+            document.querySelector('.ball').style.animationDuration = '3s';
+            document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function (element) {
+              element.classList.add('hidden');
+            });
+            setTimeout(function () {
+              stage.classList.add('hidden');
+              pageWrapper.classList.remove('dark-bg');
+              document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function (element) {
+                element.classList.remove('hidden');
+              });
+            }, 1000);
+          } else {
+            stage.classList.add('hidden');
+            pageWrapper.classList.remove('dark-bg');
+            document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function (element) {
+              element.classList.remove('hidden');
+            });
+          }
         });
-        setTimeout(function() {
-          stage.classList.add('hidden');
-          pageWrapper.classList.remove('dark-bg'); 
-          document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
-            element.classList.remove('hidden');
-          });
-        }, 1000); 
-      } else {
-        stage.classList.add('hidden');
-        pageWrapper.classList.remove('dark-bg'); 
-        document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
-          element.classList.remove('hidden');
-        });
-      }
-    });
 
       </script>
 
@@ -86,8 +86,7 @@ document.getElementById('animation-btn').addEventListener('click', function() {
             <p>Historique</p>
           </a>
 
-          <button class="bouton-historique" id="random-transport-btn">Transport Aléatoire</button>
-          <div id="transport-info"></div>
+
 
       </div>
 
