@@ -3,7 +3,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-const randomLocationBtn = document.getElementById('random-location-btn');
+const randomLocationBtn = document.getElementById('animation-btn');
 let hotelMarker = null;
 
 const francePolygon = [
@@ -206,3 +206,12 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error('Error fetching activitie data:', error);
     });
 });
+
+function toggleMenu() {
+  var menu = document.getElementById('hotelMenu');
+  if (menu.style.display === 'block') {
+    menu.style.display = 'none';
+  } else {
+    menu.style.display = 'block';
+  }
+}

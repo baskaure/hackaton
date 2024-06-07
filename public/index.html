@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,22 +10,104 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
-
+<div class="avatar">
+    <img src="./static/nuage.png" alt="Skytsunami" />
+</div>
+<div class="avatar2">
+  <img src="./static/nuage.png" alt="Skytsunami" />
+</div>
+<div class="avatar3">
+  <img src="./static/nuage.png" alt="Skytsunami" />
+</div>
 <body>
+  <div class="background-image"></div>
+  <div class="page-wrapper">
   <div class="container">
-    <a href="index.html">
+    <a href="/">
       <img class="logo" src="./static/logo hackaton (2).png" alt="Logo">
     </a>
     <a href="/loginn">
       <img class="profil" src="./static/Profil.png" alt="Profil">
     </a>
-    <button class="button" id="random-location-btn">DESTINATION ALEATOIRE</button>
+    <button class="button" id="animation-btn">DESTINATION ALEATOIRE</button>
+    <section id="stage" class="stage hidden">
+      <figure class="ball"><span class="shadow"></span></figure>
+    </section>
+
+    <script>
+
+
+document.getElementById('animation-btn').addEventListener('click', function() {
+      var pageWrapper = document.querySelector('.page-wrapper');
+      pageWrapper.classList.toggle('dark-bg');
+      
+      var stage = document.getElementById('stage');
+            
+      if (stage.classList.contains('hidden')) {
+        stage.classList.remove('hidden');
+        document.querySelector('.ball').style.animationDuration = '3s';
+        document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
+          element.classList.add('hidden');
+        });
+        setTimeout(function() {
+          stage.classList.add('hidden');
+          pageWrapper.classList.remove('dark-bg'); // Supprimer la classe lorsque l'animation est terminée
+          document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
+            element.classList.remove('hidden');
+          });
+        }, 1000); // Hide after 3 seconds
+      } else {
+        stage.classList.add('hidden');
+        pageWrapper.classList.remove('dark-bg'); // Supprimer la classe si l'animation est annulée
+        document.querySelectorAll('.logo-container, .profil-container, .button').forEach(function(element) {
+          element.classList.remove('hidden');
+        });
+      }
+    });
+
+    </script>
+
     <div id="map"></div>
-    <div id="hotel-info"></div>
-    <div id="activitie-info"></div>
+    
+    <div class="contener-sous">
+    <nav>
+      <ul>
+        <li class="deroulant"><a href="#">Choisir le rayon de recherche &ensp;</a>
+          <ul class="sous">
+            <li><a href="#">5KM</a></li>
+            <li><a href="#">10KM</a></li>
+            <li><a href="#">15KM</a></li>
+            <li><a href="#">20KM</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a href="/historique" class="bouton-historique">
+        <p>Historique</p>
+      </a>
+
+      <button class="bouton-historique" id="random-transport-btn">Transport Aléatoire</button>
+      <div id="transport-info" ></div>
+
+    </div>
+
+    <div class="container-menu">
+      <div id="hotel-info" class="hotel-element">
+        <p>HOTEL</p>
+      </div>
+      <div id="activitie-info" class="activite-element">
+        <p>ACTIVITES</p>
+      </div>
+    </div>
   </div>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
+</div>
+<script src="script.js"></script>
 </body>
+<footer>
+  <p>
+    © Copyright - By Aurélien, Mathis, Jeremie, Dany - 2024 Ynov.
+  </p>
+</footer>
 
 </html>
